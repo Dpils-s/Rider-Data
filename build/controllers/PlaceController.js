@@ -12,16 +12,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getBrands = void 0;
-const brand_model_1 = __importDefault(require("../Model/brand.model"));
-// GET /api/brands
-const getBrands = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const express_1 = __importDefault(require("express"));
+const Place_1 = __importDefault(require("../models/Place"));
+const router = express_1.default.Router();
+router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const brands = yield brand_model_1.default.find({}, '-__v');
-        res.status(200).json(brands);
+        const places = yield Place_1.default.find();
+        res.json(places);
     }
-    catch (error) {
-        res.status(500).json({ error: error });
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
     }
-});
-exports.getBrands = getBrands;
+}));
+router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { place, description } = req.body;
+        const newPlace = new Place_1.default({
+            place,
+            description,
+        });
+        yield newPlace.save();
+        res.json(newPlace);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+}));
+exports.default = router;
+//# sourceMappingURL=PlaceController.js.map
