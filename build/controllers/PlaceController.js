@@ -25,6 +25,20 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ message: 'Server error' });
     }
 }));
+router.get('/:UId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Retrieve the ID from the request parameters
+        const { UId } = req.params;
+        // Retrieve the data from MongoDB by ID
+        const data = yield Place_1.default.findById(UId);
+        // Return the data as a response
+        res.json(data);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving data' });
+    }
+}));
 router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { place, description } = req.body;
