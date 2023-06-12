@@ -4,10 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const brand = new mongoose_1.default.Schema({
-    name: String,
-    description: String,
+const keySchema = new mongoose_1.default.Schema({
+    key: {
+        type: String,
+        required: true,
+    },
 });
-// Create a Mongoose model
-const Brand = mongoose_1.default.model('Brand', brand);
-exports.default = Brand;
+const Key = mongoose_1.default.model('Key', keySchema);
+exports.default = Key;
+//# sourceMappingURL=Key.js.map

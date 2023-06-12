@@ -1,35 +1,35 @@
 {
-  "name": "DashBuddy-Data",
+  "name": "test",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "start": "node build/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Null-Not-Found/DashBuddy-Data.git"
+    "start": "node build/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Null-Not-Found/DashBuddy-Data/issues"
-  },
-  "homepage": "https://github.com/Null-Not-Found/DashBuddy-Data#readme",
+  "description": "",
   "devDependencies": {
-    "@types/node": "^18.15.3",
-    "typescript": "^5.0.2"
+    "@types/google.maps": "^3.53.1",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.15.12",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1"
   },
   "dependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
-    "bluebird": "^3.7.2",
+    "@types/mongoose": "^5.11.97",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
-    "mongoose": "^7.0.3"
+    "mongoose": "^7.0.4",
+    "typescript": "^5.0.4"
   }
 }

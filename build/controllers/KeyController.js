@@ -12,16 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getBrands = void 0;
-const brand_model_1 = __importDefault(require("../Model/brand.model"));
-// GET /api/brands
-const getBrands = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const express_1 = __importDefault(require("express"));
+const Key_1 = __importDefault(require("../models/Key"));
+const router = express_1.default.Router();
+router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const brands = yield brand_model_1.default.find({}, '-__v');
-        res.status(200).json(brands);
+        const places = yield Key_1.default.find();
+        res.json(places);
     }
-    catch (error) {
-        res.status(500).json({ error: error });
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
     }
-});
-exports.getBrands = getBrands;
+}));
+exports.default = router;
+//# sourceMappingURL=KeyController.js.map
