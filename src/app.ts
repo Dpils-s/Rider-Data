@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import placeRouter from './controllers/PlaceController';
+import keyRouter from './controllers/KeyController';
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,7 @@ db.once('open', function () {
 });
 
 app.use('/places', placeRouter);
+app.use('/key', keyRouter);
 
 app.listen(4080, () => {
     console.log('App listening on port 4080!');

@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const PlaceController_1 = __importDefault(require("./controllers/PlaceController"));
+const KeyController_1 = __importDefault(require("./controllers/KeyController"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
@@ -18,6 +19,7 @@ db.once('open', function () {
     console.log('Connected to MongoDB!');
 });
 app.use('/places', PlaceController_1.default);
+app.use('/key', KeyController_1.default);
 app.listen(4080, () => {
     console.log('App listening on port 4080!');
 });
