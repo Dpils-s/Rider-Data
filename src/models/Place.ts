@@ -10,6 +10,10 @@ const placeSchema = new mongoose.Schema({
         type: JSON,
         required: true,
     },
+    deliveryDate: {
+        type: String,
+        timestamps: false
+    },
     description: {
         type: String,
     }

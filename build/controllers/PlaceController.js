@@ -17,7 +17,8 @@ const Place_1 = __importDefault(require("../models/Place"));
 const router = express_1.default.Router();
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const places = yield Place_1.default.find();
+        const currentDate = new Date().getFullYear() + "-" + (Number.parseInt(new Date().getMonth().toString()) + 1) + "-" + new Date().getDate();
+        const places = yield Place_1.default.find().where({ 'deliveryDate': currentDate });
         res.json(places);
     }
     catch (err) {
