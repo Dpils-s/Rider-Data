@@ -9,6 +9,10 @@ const placeSchema = new mongoose_1.default.Schema({
         type: JSON,
         required: true,
     },
+    deliveryDate: {
+        type: String,
+        timestamps: false
+    },
     description: {
         type: String,
     }
