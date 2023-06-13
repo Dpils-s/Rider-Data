@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
     try {
-        const places = await Place.find();
+        const currentDate: string = new Date().getFullYear() + "-" + (Number.parseInt(new Date().getMonth().toString())+1) + "-" + new Date().getDate();
+        const places = await Place.find().where({ 'deliveryDate': currentDate});
         res.json(places);
     } catch (err) {
         console.error(err);
