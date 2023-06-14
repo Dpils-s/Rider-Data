@@ -25,13 +25,13 @@ describe('PlaceManager', () => {
     it('should get all places', () => __awaiter(void 0, void 0, void 0, function* () {
         const places = yield placeManager.getAllPlaces();
         (0, chai_1.expect)(places).to.have.lengthOf(2);
-        (0, chai_1.expect)(places[0].place).to.equal({ name: 'Place 1', location: { lat: 0, lng: 0 } });
-        (0, chai_1.expect)(places[1].place).to.equal({ name: 'Place 2', location: { lat: 0, lng: 0 } });
+        (0, chai_1.expect)(places[0].place).to.deep.equal({ name: 'Place 1', location: { lat: 0, lng: 0 } });
+        (0, chai_1.expect)(places[1].place).to.deep.equal({ name: 'Place 2', location: { lat: 0, lng: 0 } });
     }));
     it('should get a place by ID', () => __awaiter(void 0, void 0, void 0, function* () {
         const place = yield placeManager.getPlaceById('1');
         (0, chai_1.expect)(place).to.not.be.null;
-        (0, chai_1.expect)(place === null || place === void 0 ? void 0 : place.place).to.equal({ name: 'Place 1', location: { lat: 0, lng: 0 } });
+        (0, chai_1.expect)(place === null || place === void 0 ? void 0 : place.place).to.deep.equal({ name: 'Place 1', location: { lat: 0, lng: 0 } });
     }));
     it('should return null when getting a non-existent place', () => __awaiter(void 0, void 0, void 0, function* () {
         const place = yield placeManager.getPlaceById('3');

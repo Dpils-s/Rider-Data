@@ -8,25 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuid_1 = require("uuid"); // For generating unique IDs
-const Place_1 = __importDefault(require("../../src/models/Place"));
 class MockPlaceController {
     constructor() {
         this.places = [
-            new Place_1.default({
+            {
                 _id: '1',
                 place: { name: 'Place 1', location: { lat: 0, lng: 0 } },
                 description: 'Description 1',
-            }),
-            new Place_1.default({
+            },
+            {
                 _id: '2',
                 place: { name: 'Place 2', location: { lat: 0, lng: 0 } },
                 description: 'Description 2',
-            })
+            }
         ];
     }
     getAllPlaces() {
@@ -50,9 +46,6 @@ class MockPlaceController {
             this.places.push(newPlace);
             return newPlace;
         });
-    }
-    clearPlaces() {
-        this.places.length = 0;
     }
 }
 exports.default = MockPlaceController;

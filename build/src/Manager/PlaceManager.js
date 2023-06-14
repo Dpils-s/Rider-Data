@@ -15,35 +15,17 @@ class PlaceManager {
     }
     getAllPlaces() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield this.controller.getAllPlaces();
-            }
-            catch (err) {
-                console.error(err);
-                throw new Error('Error retrieving places');
-            }
+            return yield this.controller.getAllPlaces();
         });
     }
     getPlaceById(UId) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield this.controller.getPlaceById(UId);
-            }
-            catch (err) {
-                console.error(err);
-                throw new Error('Error retrieving place');
-            }
+            return yield this.controller.getPlaceById(UId);
         });
     }
     createPlace(place, description) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield this.controller.createPlace(place, description);
-            }
-            catch (err) {
-                console.error(err);
-                throw new Error('Error creating place');
-            }
+            return yield this.controller.createPlace(place, description);
         });
     }
 }
