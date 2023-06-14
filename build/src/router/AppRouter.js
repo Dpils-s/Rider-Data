@@ -12,14 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.router = void 0;
 const express_1 = __importDefault(require("express"));
-const Place_1 = __importDefault(require("../models/Place"));
+const PlaceController_1 = __importDefault(require("../controllers/PlaceController"));
+const placeController = new PlaceController_1.default();
 const router = express_1.default.Router();
-exports.router = router;
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const places = yield Place_1.default.find();
+        const places = yield placeController.getAllPlaces();
         res.json(places);
     }
     catch (err) {
@@ -29,12 +28,14 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 router.get('/:UId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Retrieve the ID from the request parameters
         const { UId } = req.params;
-        // Retrieve the data from MongoDB by ID
-        const data = yield Place_1.default.findById(UId);
-        // Return the data as a response
-        res.json(data);
+        const place = yield placeController.getPlaceById(UId);
+        if (place) {
+            res.json(place);
+        }
+        else {
+            res.status(404).json({ message: 'Place not found' });
+        }
     }
     catch (error) {
         console.error(error);
@@ -44,11 +45,7 @@ router.get('/:UId', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { place, description } = req.body;
-        const newPlace = new Place_1.default({
-            place,
-            description,
-        });
-        yield newPlace.save();
+        const newPlace = yield placeController.createPlace(place, description);
         res.json(newPlace);
     }
     catch (err) {
@@ -56,4 +53,5 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ message: 'Server error' });
     }
 }));
-//# sourceMappingURL=PlaceController.js.map
+exports.default = router;
+//# sourceMappingURL=AppRouter.js.map

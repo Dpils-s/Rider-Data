@@ -1,50 +1,41 @@
 import express, { Request, Response } from 'express';
 import Place, { PlaceDocument } from '../models/Place';
+import IPlaceController from "../interfaces/IPlaceController";
 
 const router = express.Router();
 
-router.get('/', async (req: Request, res: Response) => {
-    try {
-        const places = await Place.find();
-        res.json(places);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
+class PlaceController implements IPlaceController{
+    async getAllPlaces(): Promise<PlaceDocument[]> {
+        try {
+            const places = await Place.find();
+            return places;
+        } catch (err) {
+            console.error(err);
+            throw new Error('Error retrieving places');
+        }
     }
-});
-
-router.get('/:UId', async (req: Request<{UId: String}>, res: Response) => {
-    try {
-        // Retrieve the ID from the request parameters
-        const { UId } = req.params;
-
-        // Retrieve the data from MongoDB by ID
-        const data = await Place.findById(UId);
-
-        // Return the data as a response
-        res.json(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error retrieving data' });
+    async getPlaceById(UId: string): Promise<PlaceDocument | null> {
+        try {
+            const place = await Place.findById(UId);
+            return place;
+        } catch (err) {
+            console.error(err);
+            throw new Error('Error retrieving place');
+        }
     }
-});
-
-router.post('/', async (req: Request, res: Response) => {
-    try {
-        const { place, description } = req.body;
-
-        const newPlace: PlaceDocument = new Place({
-            place,
-            description,
-        });
-
-        await newPlace.save();
-
-        res.json(newPlace);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
+    async createPlace(place: JSON, description: string): Promise<PlaceDocument> {
+        try {
+            const newPlace: PlaceDocument = new Place({
+                place,
+                description,
+            });
+            await newPlace.save();
+            return newPlace;
+        } catch (err) {
+            console.error(err);
+            throw new Error('Error creating place');
+        }
     }
-});
+}
 
-export default router;
+export default  PlaceController ;
